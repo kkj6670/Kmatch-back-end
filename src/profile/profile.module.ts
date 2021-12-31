@@ -4,11 +4,13 @@ import { HttpModule } from '@nestjs/axios';
 import { ProfileService } from './profile.service';
 import { ProfileController } from './profile.controller';
 
+console.log(process.env.API_KEY, 'KEY');
+
 @Module({
   imports: [
     HttpModule.register({
       headers: {
-        'X-Riot-Token': 'RGAPI-302fdcd4-3dc7-442d-86eb-79e4abecbc94',
+        'X-Riot-Token': process.env.API_KEY,
       }, // object of headers you want to set
     }),
   ],
