@@ -21,9 +21,14 @@ export class ProfileService {
   async getProfile(name: string) {
     const summonner = await firstValueFrom(this.getSummonner(name));
     const matchIds = await firstValueFrom(this.getMatchIds(summonner.puuid));
-    const matchs = matchIds.map((id) => firstValueFrom(this.getMatch(id)));
+    const matchs = await Promise.all(matchIds.map((id) => firstValueFrom(this.getMatchs(id))));
 
-    return Promise.all(matchs);
+    console.log(summonner);
+
+    return {
+      summonner,
+      matchs,
+    };
   }
 
   getSummonner(name: string): Observable<ISummonner> {
@@ -48,7 +53,7 @@ export class ProfileService {
       );
   }
 
-  getMatch(id: string): Observable<object> {
+  getMatchs(id: string): Observable<object> {
     return this.httpService.get(`https://asia.api.riotgames.com/tft/match/v1/matches/${id}`).pipe(
       map((res) => res.data),
       catchError((e) => {
