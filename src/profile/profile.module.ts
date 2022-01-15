@@ -4,8 +4,6 @@ import { HttpModule } from '@nestjs/axios';
 import { ProfileService } from './profile.service';
 import { ProfileController } from './profile.controller';
 
-console.log(process.env.API_KEY, 'KEY');
-
 @Module({
   imports: [
     HttpModule.register({
