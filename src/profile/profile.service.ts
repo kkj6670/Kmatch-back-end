@@ -31,7 +31,7 @@ export class ProfileService {
 
   getSummonner(name: string): Observable<ISummonner> {
     return this.httpService
-      .get(`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(name)}`)
+      .get(`https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-name/${encodeURI(name)}`)
       .pipe(
         map((res) => res.data),
         catchError((e) => {
