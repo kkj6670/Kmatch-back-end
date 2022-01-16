@@ -23,8 +23,6 @@ export class ProfileService {
     const matchIds = await firstValueFrom(this.getMatchIds(summonner.puuid));
     const matchs = await Promise.all(matchIds.map((id) => firstValueFrom(this.getMatchs(id))));
 
-    console.log(summonner);
-
     return {
       summonner,
       matchs,
